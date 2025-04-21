@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+
 import './globals.css';
+
+import { Providers } from '@/app/providers';
 
 import { Header } from '@/components/header/header';
 
@@ -35,10 +38,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html
+			lang='en'
+			suppressHydrationWarning
+		>
 			<body className={`${nunito.className} antialiased min-h-screen`}>
-				<Header />
-				<main>{children}</main>
+				<Providers>
+					<Header />
+					<main>{children}</main>
+				</Providers>
 			</body>
 		</html>
 	);
