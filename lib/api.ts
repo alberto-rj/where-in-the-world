@@ -1,3 +1,12 @@
+// GET		: https://restcountries.com/v3.1/all?{fields} - get all countries
+// USAGE	: https://restcountries.com/v3.1/all?fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld
+
+// GET		: https://restcountries.com/v3.1/region/{region}?{fields} - filter countries by region
+// USAGE	: https://restcountries.com/v3.1/region/africa?fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld
+
+// GET		: https://restcountries.com/v3.1/name/{name}?{fields} - filter country by common or official name
+// USAGE	: https://restcountries.com/v3.1/name/angola?fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld
+
 const API_BASE_URL = 'https://restcountries.com/v3.1';
 const API_FIELDS =
 	'fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld';
