@@ -40,10 +40,11 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@layer components {
+@layer utilities {
 	.container {
 		max-width: 80rem;
 		margin-inline: auto;
-		padding-inline: clamp(1rem, 6vw, 5rem);
+		width: 100%;
+		@apply px-[1rem] sm:px-[3rem] md:px-[5rem];
 	}
 }
