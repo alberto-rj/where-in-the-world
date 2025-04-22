@@ -24,11 +24,7 @@ export const getAllCountries = async () => {
 	return await response.json();
 };
 
-export const getCountriesByRegion = async (region?: string) => {
-	if (!region) {
-		return await getAllCountries();
-	}
-
+export const getCountriesByRegion = async (region: string) => {
 	const url = `${API_BASE_URL}/region/${region}?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
@@ -50,11 +46,7 @@ export const getCountriesByRegion = async (region?: string) => {
 	return await response.json();
 };
 
-export const getCountriesByName = async (name?: string) => {
-	if (!name) {
-		return await getAllCountries();
-	}
-
+export const getCountriesByName = async (name: string) => {
 	const url = `${API_BASE_URL}/name/${name}?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
