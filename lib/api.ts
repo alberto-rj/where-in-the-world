@@ -55,7 +55,7 @@ export const getCountriesByRegion = async (region: string) => {
 	return await response.json();
 };
 
-export const getCountriesByName = async (name: string) => {
+export const getCountryByName = async (name: string) => {
 	const url = `${API_BASE_URL}/name/${name}?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
@@ -67,7 +67,7 @@ export const getCountriesByName = async (name: string) => {
 	});
 
 	if (response.status === 404) {
-		return [];
+		return null;
 	}
 
 	if (!response.ok) {

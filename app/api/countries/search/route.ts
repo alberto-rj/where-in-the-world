@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getCountriesByName } from '@/lib/api';
+import { getCountryByName } from '@/lib/api';
 
 export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
 	}
 
 	try {
-		const countries = await getCountriesByName(name);
+		const countries = await getCountryByName(name);
 		return NextResponse.json(countries);
 	} catch (error) {
 		return NextResponse.json(
