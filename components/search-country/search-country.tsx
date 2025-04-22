@@ -1,6 +1,27 @@
+'use client';
+
+import { useState } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import { SearchIcon } from 'lucide-react';
 
 export const SearchCountry = () => {
+	const [query, setQuery] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const handleSearch = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (!query.trim()) return;
+
+		const params = new URLSearchParams(searchParams);
+		params.set('search', query);
+		router.push(`/?${params.toString()}`);
+	};
+
 	return (
 		<div
 			className='
@@ -36,8 +57,9 @@ export const SearchCountry = () => {
 				/>
 			</label>
 			<input
+				onChange={(e) => setQuery(e.target.value)}
 				id='search-country'
-				placeholder='Search for a country...'
+				placeholder='Search for a country by common or official name'
 				className='
 					grow 
 					border-none 
