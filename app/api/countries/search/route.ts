@@ -14,9 +14,7 @@ export async function GET(request: Request) {
 	}
 
 	try {
-		const res = await getCountriesByName(name);
-		const countries = await res.json();
-
+		const countries = await getCountriesByName(name);
 		return NextResponse.json(countries);
 	} catch (error) {
 		return NextResponse.json(
