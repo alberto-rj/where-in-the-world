@@ -7,11 +7,15 @@
 // GET		: https://restcountries.com/v3.1/name/{name}?{fields} - filter country by common or official name
 // USAGE	: https://restcountries.com/v3.1/name/angola?fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld
 
+import { z } from 'zod';
+
+import { type Country, countrySchema } from '@/lib/country-schema';
+
 const API_BASE_URL = 'https://restcountries.com/v3.1';
 const API_FIELDS =
 	'fields=borders,capital,currencies,flags,languages,name,population,region,subregion,tld';
 
-export const getAllCountries = async () => {
+export const getAllCountries = async (): Promise<Country[]> => {
 	const url = `${API_BASE_URL}/all?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
@@ -22,18 +26,22 @@ export const getAllCountries = async () => {
 		},
 	});
 
-	if (response.status === 404) {
-		return [];
-	}
-
 	if (!response.ok) {
 		throw new Error('Failed to fetch countries');
 	}
 
-	return await response.json();
+	try {
+		const data = await response.json();
+		return z.array(countrySchema).parse(data);
+	} catch (error) {
+		console.error('Validation error:', error);
+		throw new Error('Country data has unexpected format');
+	}
 };
 
-export const getCountriesByRegion = async (region: string) => {
+export const getCountriesByRegion = async (
+	region: string
+): Promise<Country[]> => {
 	const url = `${API_BASE_URL}/region/${region}?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
@@ -49,13 +57,21 @@ export const getCountriesByRegion = async (region: string) => {
 	}
 
 	if (!response.ok) {
-		throw new Error('Failed to fetch countries');
+		throw new Error(`Failed to fetch countries from region: ${region}`);
 	}
 
-	return await response.json();
+	try {
+		const data = await response.json();
+		return z.array(countrySchema).parse(data);
+	} catch (error) {
+		console.error('Validation error:', error);
+		throw new Error('Country data has unexpected format');
+	}
 };
 
-export const getCountryByName = async (name: string) => {
+export const getCountryByName = async (
+	name: string
+): Promise<Country | null> => {
 	const url = `${API_BASE_URL}/name/${name}?${API_FIELDS}`;
 	const response = await fetch(url, {
 		headers: {
@@ -71,8 +87,14 @@ export const getCountryByName = async (name: string) => {
 	}
 
 	if (!response.ok) {
-		throw new Error('Failed to fetch countries');
+		throw new Error(`Failed to fetch country: ${name}`);
 	}
 
-	return response.json();
+	try {
+		const [data] = await response.json();
+		return countrySchema.parse(data);
+	} catch (error) {
+		console.error('Validation error:', error);
+		throw new Error('Country data has unexpected format');
+	}
 };
