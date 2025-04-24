@@ -48,3 +48,71 @@
 		@apply px-[1rem] sm:px-[3rem] md:px-[5rem];
 	}
 }
+
+.btn {
+
+  /* reset */
+  @apply outline-none border-none;
+  @apply cursor-pointer;
+  @apply rounded-sm shadow-sm;
+  @apply px-6 py-2;
+  @apply text-sm;
+
+  /* bg and color - start */
+  @apply bg-neutral-100 text-neutral-600;
+  /* bg and color - end */
+
+  /* bg and color (dark mode) - start */
+  @apply dark:bg-neutral-1 dark:text-neutral-100;
+  /* bg and color (dark mode9 - end */
+
+  /* hover state - start */
+  @apply hover:bg-neutral-600 hover:text-neutral-100;
+  /* hover state - end */
+
+  /* hover state (dark mode) - start */
+  @apply dark:hover:bg-neutral-100 dark:hover:text-neutral-600;
+  /* hover state (dark mode) - end */
+
+  /* focus state - start */
+  @apply focus:ring-2 focus:ring-neutral-600;
+  /* focus state - end */
+
+  /* focus state (dark mode) - start */
+  @apply dark:focus:ring-neutral-100;
+  /* focus state (dark mode) - end */
+
+  &[data-has='icon'] {
+    @apply flex gap-2 items-center;
+
+    @apply rounded-lg shadow-2xl;
+  }
+}
+
+.country-detail {
+  @apply flex gap-[44px] justify-between items-center;
+}
+
+.country-detail-flag {
+  /* mobile flag dimensions */
+  /* width: 320px */
+  /* height: 229px */
+  /* mobile flag dimensions */
+
+  /* desktop flag dimensions */
+  /* width: 560px */
+  /* height: 401px */
+  /* desktop flag dimensions */
+  @apply rounded-lg sm:rounded-2xl;
+
+  @apply w-full object-cover;
+}
+
+.country-detail-content {
+}
+
+.country-detail-title {
+}
+
+.country-detail-grid {
+}
